@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-var Sstring string
+var Sstring string = "string"
 var Bbyte byte
 var Bbool bool
 
