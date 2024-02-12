@@ -32,13 +32,13 @@ func (c cricle) area() float64 {
 	return math.Pi * math.Pow(c.radius, 2)
 }
 
-func square(s float32) (float64, float64, error) {
+func square(s float64) (float64, float64, error) {
 
 	if s <= 0 {
 		err := errors.New("The sies of the square cannot be 0 or below")
 		return -1, -1, err
 	} else {
-		cc1 := triange{3, 3}
+		cc1 := triange{s, s}
 		return cc1.area(), cc1.perimeter(), nil
 	}
 }
@@ -53,8 +53,8 @@ func testTriangle(val triange) {
 		return
 	}
 
-	fmt.Println("area of the triangle:", val.area())
-	fmt.Println("perimeter of the triangle:", val.perimeter())
+	fmt.Println("area of the triangle:", a)
+	fmt.Println("perimeter of the triangle:", p)
 	fmt.Println("----------------------------")
 }
 
@@ -67,7 +67,7 @@ func testCircle(val cricle) {
 		return
 	}
 
-	fmt.Println("area of the circle:", val.area())
+	fmt.Println("area of the circle:", r)
 	fmt.Println("----------------------------")
 }
 
