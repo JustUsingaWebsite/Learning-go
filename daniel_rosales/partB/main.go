@@ -26,3 +26,10 @@ func measure(g geometry) {
 	fmt.Println("Area:", g.area())
 	fmt.Println("Perimeter:", g.perimeter())
 }
+
+func main() {
+
+	t := triangle{base: 3, height: 4}
+
+	measure(t)
+}
