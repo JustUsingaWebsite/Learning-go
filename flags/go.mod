@@ -1,3 +1,3 @@
-module lewisdalwin.net/flags
+module lewisdalwin.net/parase
 
 go 1.18
