@@ -15,6 +15,9 @@ func count(thing string, c chan string) {
 func main() {
 	c := make(chan string)
 	go count("sheep", c)
-	msg := <-c
-	fmt.Println(msg)
+
+	for {
+		msg := <-c
+		fmt.Println(msg)
+	}
 }
