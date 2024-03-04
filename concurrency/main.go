@@ -18,12 +18,7 @@ func main() {
 	c := make(chan string)
 	go count("sheep", c)
 
-	for {
-
-		msg, open := <-c
-		if !open {
-			break
-		}
+	for msg := range c {
 		fmt.Println(msg)
 	}
 }
