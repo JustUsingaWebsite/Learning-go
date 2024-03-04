@@ -2,14 +2,20 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
 func main() {
-	go count("sheep")
-	go count("fish")
+	var wg sync.WaitGroup
+	wg.Add(1)
 
-	fmt.Scanln()
+	go func() {
+		count("sheep")
+		wg.Done()
+	}()
+
+	wg.Wait()
 }
 
 func count(thing string) {
