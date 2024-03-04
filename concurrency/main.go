@@ -7,9 +7,11 @@ import (
 
 func count(thing string, c chan string) {
 	for i := 1; i <= 5; i++ {
-		fmt.Println(i, thing)
+		c <- thing
 		time.Sleep(time.Millisecond * 500)
 	}
+
+	close(c)
 }
 
 func main() {
@@ -17,7 +19,11 @@ func main() {
 	go count("sheep", c)
 
 	for {
-		msg := <-c
+
+		msg, open := <-c
+		if !open {
+			break
+		}
 		fmt.Println(msg)
 	}
 }
