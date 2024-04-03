@@ -3,33 +3,20 @@ package main
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
-func deposit(bal *int, amt int, mx *sync.Mutex, wg *sync.WaitGroup) {
-	mx.Lock()
-	*bal = *bal + amt
-	mx.Unlock()
-	wg.Done()
-}
-
-func withdraw(bal *int, amt int, mx *sync.Mutex, wg *sync.WaitGroup) {
-	mx.Lock()
-	*bal = *bal - amt
-	mx.Unlock()
-	wg.Done()
-}
-
 func main() {
-	var mx sync.Mutex
-	var wg sync.WaitGroup
+	mx := sync.Mutex{}
+	mx.Lock()
 
-	bal := 1000
+	go func() {
+		mx.Lock()
+		fmt.Println("hola amigo")
+		mx.Unlock()
+	}()
 
-	wg.Add(2)
-
-	go deposit(&bal, 500, &mx, &wg)
-	withdraw(&bal, 1000, &mx, &wg)
-
-	wg.Wait()
-	fmt.Println(bal)
+	fmt.Println("hello friend")
+	mx.Unlock()
+	time.Sleep(time.Second)
 }
