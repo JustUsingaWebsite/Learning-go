@@ -5,6 +5,13 @@ import (
 	"sync"
 )
 
+func deposit(bal *int, amt int, mx *sync.Mutex, wg *sync.WaitGroup) {
+	mx.Lock()
+	*bal = *bal + amt
+	mx.Unlock()
+	wg.Done()
+}
+
 func main() {
 	var mx sync.Mutex
 	var wg sync.WaitGroup
