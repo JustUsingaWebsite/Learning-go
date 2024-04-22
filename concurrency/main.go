@@ -2,33 +2,25 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
 func main() {
-	c1 := make(chan string)
-	c2 := make(chan string)
+	var wg sync.WaitGroup
+	wg.Add(1)
 
 	go func() {
-		for {
-			c1 <- "every 500ms"
-			time.Sleep(time.Millisecond * 500)
-		}
+		count("sheep")
+		wg.Done()
 	}()
 
-	go func() {
-		for {
-			c2 <- "every 2 seconds"
-			time.Sleep(time.Second * 2)
-		}
-	}()
+	wg.Wait()
+}
 
-	for {
-		select {
-		case msg1 := <-c1:
-			fmt.Println(msg1)
-		case msg2 := <-c2:
-			fmt.Println(msg2)
-		}
+func count(thing string) {
+	for i := 1; i <= 5; i++ {
+		fmt.Println(i, thing)
+		time.Sleep(time.Millisecond * 500)
 	}
 }
